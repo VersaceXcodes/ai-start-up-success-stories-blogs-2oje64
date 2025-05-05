@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746444644235,
+  "operation": {
+    "id": "db:postgres"
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/backend/db.sql",
+      "type": "text",
+      "size": 5159,
+      "dependencies": false
+    }
+  ]
+}

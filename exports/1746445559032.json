@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746445559032,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_Footer_Public",
+      "version": "1746445239543"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/components/views/GV_Footer_Public.tsx",
+      "type": "text",
+      "size": 3578,
+      "dependencies": false
+    }
+  ]
+}

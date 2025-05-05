@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746444735150,
+  "operation": {
+    "id": "backend:specifications:asyncapi"
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/backend/asyncapi.yaml",
+      "type": "text",
+      "size": 3,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746444861132,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/backend/.env",
+      "type": "text",
+      "size": 465,
+      "dependencies": false
+    }
+  ]
+}

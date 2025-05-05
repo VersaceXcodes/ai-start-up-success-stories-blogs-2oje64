@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746445521223,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_AdminPostPreview",
+      "version": "1746445239531"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/components/views/UV_AdminPostPreview.tsx",
+      "type": "text",
+      "size": 5130,
+      "dependencies": false
+    }
+  ]
+}

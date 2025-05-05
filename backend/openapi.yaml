@@ -1,0 +1,402 @@
+openapi: 3.0.0
+info:
+  title: AI Start-Up Success Chronicles API
+  version: 1.0.0
+  description: >
+    This API supports both public-facing operations (blog post discovery,
+    detailed post views, newsletter subscriptions, tag retrieval) and admin
+    operations (authentication, blog post CRUD operations). It is designed for
+    an MVP using JWT-based authentication.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/auth/login:
+    post:
+      summary: Authenticate admin user and return JWT token
+      operationId: login_admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login_request"
+      responses:
+        "200":
+          description: Successful authentication with JWT token and user details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/login_response"
+        "400":
+          description: Bad Request - Invalid credentials provided
+  /api/blog_posts:
+    get:
+      summary: Retrieve a paginated list of blog posts with optional search and tag
+        filters
+      operationId: list_blog_posts
+      parameters:
+        - name: search
+          in: query
+          description: Keyword search in title and excerpt
+          schema:
+            type: string
+          required: false
+        - name: tags
+          in: query
+          description: Comma-separated list of tag IDs to filter blog posts
+          schema:
+            type: string
+          required: false
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+          required: false
+      responses:
+        "200":
+          description: A list of blog posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/blog_post_list_item"
+        "500":
+          description: Internal Server Error
+    post:
+      summary: Create a new blog post (Admin only)
+      operationId: create_blog_post
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/create_blog_post_request"
+      responses:
+        "201":
+          description: Blog post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/blog_post_detail"
+        "400":
+          description: Bad Request - Invalid input provided
+        "401":
+          description: Unauthorized - Invalid or missing JWT token
+  /api/blog_posts/{id}:
+    get:
+      summary: Retrieve full details of a specific blog post
+      operationId: get_blog_post_detail
+      parameters:
+        - name: id
+          in: path
+          description: Unique identifier of the blog post
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Blog post detail retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/blog_post_detail"
+        "404":
+          description: Not Found - Blog post does not exist
+    put:
+      summary: Update an existing blog post (Admin only)
+      operationId: update_blog_post
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Unique identifier of the blog post to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/update_blog_post_request"
+      responses:
+        "200":
+          description: Blog post updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/blog_post_detail"
+        "400":
+          description: Bad Request - Invalid inputs provided
+        "401":
+          description: Unauthorized - Invalid or missing JWT token
+        "404":
+          description: Not Found - Blog post does not exist
+    delete:
+      summary: Soft delete a blog post by marking it as deleted (Admin only)
+      operationId: delete_blog_post
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Unique identifier of the blog post to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Blog post deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/delete_blog_post_response"
+        "401":
+          description: Unauthorized - Invalid or missing JWT token
+        "404":
+          description: Not Found - Blog post does not exist
+  /api/newsletter_subscriptions:
+    post:
+      summary: Subscribe to the newsletter by providing an email address
+      operationId: subscribe_newsletter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/newsletter_subscription_request"
+      responses:
+        "201":
+          description: Newsletter subscription successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/newsletter_subscription_response"
+        "400":
+          description: Bad Request - Invalid email provided
+  /api/tags:
+    get:
+      summary: Retrieve a list of available tags for filtering blog posts
+      operationId: list_tags
+      responses:
+        "200":
+          description: Tags retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/tag"
+        "500":
+          description: Internal Server Error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    login_request:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    login_response:
+      type: object
+      required:
+        - token
+        - user
+      properties:
+        token:
+          type: string
+        user:
+          type: object
+          required:
+            - id
+            - username
+            - role
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+            role:
+              type: string
+    blog_post_list_item:
+      type: object
+      required:
+        - id
+        - title
+        - excerpt
+        - publication_date
+        - status
+        - tags
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: string
+        featured_image_url:
+          type: string
+          nullable: true
+        publication_date:
+          type: string
+        status:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+    blog_post_detail:
+      type: object
+      required:
+        - id
+        - title
+        - excerpt
+        - body_content
+        - publication_date
+        - status
+        - tags
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: string
+        body_content:
+          type: string
+        featured_image_url:
+          type: string
+          nullable: true
+        publication_date:
+          type: string
+        status:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    create_blog_post_request:
+      type: object
+      required:
+        - title
+        - excerpt
+        - body_content
+        - publication_date
+        - status
+      properties:
+        title:
+          type: string
+        excerpt:
+          type: string
+        body_content:
+          type: string
+        featured_image_url:
+          type: string
+          nullable: true
+        publication_date:
+          type: string
+          description: Format "YYYY-MM-DD HH:MM:SS"
+        status:
+          type: string
+          description: draft, published, or scheduled
+        tags:
+          type: array
+          items:
+            type: string
+          description: Array of Tag IDs
+    update_blog_post_request:
+      type: object
+      required:
+        - title
+        - excerpt
+        - body_content
+        - publication_date
+        - status
+      properties:
+        title:
+          type: string
+        excerpt:
+          type: string
+        body_content:
+          type: string
+        featured_image_url:
+          type: string
+          nullable: true
+        publication_date:
+          type: string
+          description: Format "YYYY-MM-DD HH:MM:SS"
+        status:
+          type: string
+          description: draft, published, or scheduled
+        tags:
+          type: array
+          items:
+            type: string
+          description: Array of Tag IDs
+    delete_blog_post_response:
+      type: object
+      required:
+        - message
+        - id
+        - is_deleted
+      properties:
+        message:
+          type: string
+        id:
+          type: string
+        is_deleted:
+          type: boolean
+    newsletter_subscription_request:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+    newsletter_subscription_response:
+      type: object
+      required:
+        - id
+        - email
+        - subscription_date
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        subscription_date:
+          type: string
+    tag:
+      type: object
+      required:
+        - id
+        - tag_name
+      properties:
+        id:
+          type: string
+        tag_name:
+          type: string
+        tag_type:
+          type: string
+          nullable: true

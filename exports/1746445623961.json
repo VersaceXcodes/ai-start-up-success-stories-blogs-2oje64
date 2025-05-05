@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746445623961,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_AdminNav",
+      "version": "1746445239557"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/components/views/GV_AdminNav.tsx",
+      "type": "text",
+      "size": 3196,
+      "dependencies": false
+    }
+  ]
+}

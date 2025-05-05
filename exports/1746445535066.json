@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746445535066,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_TopNav_Public",
+      "version": "latest"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/components/views/GV_TopNav_Public.tsx",
+      "type": "text",
+      "size": 2970,
+      "dependencies": false
+    }
+  ]
+}

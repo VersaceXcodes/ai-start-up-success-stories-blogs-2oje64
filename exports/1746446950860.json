@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746446950860,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_AdminFooter",
+      "version": "latest"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/components/views/GV_AdminFooter.tsx",
+      "type": "text",
+      "size": 612,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746445301095,
+  "operation": {
+    "id": "webapp:react:root",
+    "refs": {
+      "id": "app",
+      "version": "latest"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/App.tsx",
+      "type": "text",
+      "size": 3487,
+      "dependencies": false
+    }
+  ]
+}

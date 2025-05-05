@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746444791852,
+  "operation": {
+    "id": "backend:specifications:openapi"
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/backend/openapi.yaml",
+      "type": "text",
+      "size": 10476,
+      "dependencies": false
+    }
+  ]
+}

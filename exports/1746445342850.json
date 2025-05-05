@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746445342850,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_SearchResults",
+      "version": "1746445239472"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/components/views/UV_SearchResults.tsx",
+      "type": "text",
+      "size": 4698,
+      "dependencies": false
+    }
+  ]
+}

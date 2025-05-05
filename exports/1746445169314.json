@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746445169314,
+  "operation": {
+    "id": "webapp:react:store",
+    "refs": {
+      "id": "redux",
+      "version": "1746445121863"
+    }
+  },
+  "projectId": "ai-start-up-success-stories-blogs",
+  "files": [
+    {
+      "path": "../../apps/ai-start-up-success-stories-blogs/vitereact/src/store/main.tsx",
+      "type": "text",
+      "size": 5176,
+      "dependencies": false
+    }
+  ]
+}
