@@ -53,6 +53,12 @@ app.use(morgan('dev')); // logs method, URL, status and response time
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server is running on http://0.0.0.0:${port}`);
+});
+
 // Utility function to format dates as "YYYY-MM-DD HH:MM:SS"
 function formatTimestamp(date) {
   const pad = (n) => n < 10 ? '0' + n : n;
@@ -63,7 +69,6 @@ function formatTimestamp(date) {
          pad(date.getMinutes()) + ':' +
          pad(date.getSeconds());
 }
-
 // Middleware to verify JWT tokens on protected routes
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
